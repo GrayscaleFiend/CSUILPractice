@@ -1,0 +1,68 @@
+import java.util.Scanner;
+import java.util.*;
+
+public class bigoquiz {
+
+	public static void main(String[] args) {
+		
+		Scanner f = new Scanner(System.in);
+		boolean cont = true;
+		String input;
+		int right = 0;
+		int total = 0;
+		
+		String[] types = {"you shouldn't get this", "this is akward" , "type", "best case", "worst case", "X"};
+		
+		String[][] data= {
+				{"if(list[i]<minVal){\nminIndex=i;\nminVal=list[minIndex];\n}",
+					"if(list[i]<A){\nB=i;\nA=list[B];\n}", "selection", "O(n)2", "O(n)2", "sort" },
+				{"list[j+1]=list[j];\njust--;", 
+					"list[A+1]=list[A];\nA--;", "insertion", "O(n)", "O(n)2"},
+				{"sort(listLeft);\nsort(listRight);\nint[]x=val(listLeft,listRight)",
+					"sort(A);\nsort(B);\nint[]x=val(A,B)", "merge","O(nlogn)", "O(nlogn)", "sort"},
+				{"int searchIndex = -1;\nwhile(front<=back)\n  int middle = (front+back)/2;\nif(list[middle].equals(searchItem)){\nsearchIndex=middle;\nbreak;",
+					"while(A<=B)\nint M=(A+B)/2\nif(list[M].equals(F)){\nindex=M;" , "binary", "O(1)", "O(logn)", "search"},
+				{"if(x-1 = begin)\nsort(list,begin,x-1)\nif(x+1<=end)\nsort(list,x+1,end)", 
+					"if(x-1 = A)\nsort(list,A,x-1)\nif(x+1<=B)\n(sort(list,x+1,B)", "quick","O(nlogn)", "O(n)2", "sort"},
+				{"while(!found&&searchLoc<list.length()){\nif(list[searchLoc]==searchVal)\nfound=true;\nelse\nsearchLoc++;",
+					"while(item==false&&L<list.length()){\nif(list[L]==V)\nitem=true;\nelse L++;", "sequential", "O(1)" , "O(n)", "search"}
+			};
+				
+		
+		while(cont) {
+			int rand = (int) (Math.random()*5);
+			int sort = (int) (Math.random()*data.length);
+			int asking = (int) (Math.random()*3 + 2);
+			if(rand%2==0) {
+				System.out.println(data[sort][0]);
+			}else
+				System.out.println(data[sort][1]);
+			if(types[asking].equals("X") ) {
+				System.out.println("Is this a search or a sort?");
+			}else
+				System.out.println("What is the " + types[asking] + "?");
+			input = f.nextLine();
+			
+			if(input.equals("stop")) {
+				cont = false;
+				System.out.println("\nCongrats! You got " + right + " right out of " + total + ".");
+			}else
+			if(input.equals(data[sort][asking]) || (data[sort][asking].equals("quick") && input.equals("quack") || data[sort][asking].contentEquals("O(n)2") && input.equals("O(n2)")) ) {
+				System.out.println("Correct!\n\n");
+				right++;
+			}else {
+				System.out.println("Nope. Sorry, kid. It was "+ data[sort][asking] + ".\n\n");
+			}
+			total++;
+			
+		}
+		
+		
+		
+		
+
+		
+		f.close();
+	}
+
+}
